@@ -52,6 +52,52 @@ exit 0
 ```
 **В скрипте дополнительно настроена проверка процесса сервиса NGINX используя команду [`pidof`](https://linuxcookbook.ru/articles/komanda-pidof-linux)**
 
+* Конфигурационный файл keepalived на сервере:
+
+```
+global_defs {
+    script_user root # от имени какого пользователя выполнять проверку /etc/keepalived/check_web.sh
+    enable_script_security # Разрешаем запуск внешних скриптов (безопасность)
+}
+
+# 1. Описываем  скрипт проверки
+vrrp_script check_script {
+    script "/etc/keepalived/check_web.sh" # Путь к скрипту
+    interval 3                            # Проверка каждые 3 секунды
+    fall 2                                # Количесвто провалов для смены статуса
+    rise 2                                # Количество успешных проверок для возврата
+}
+
+# 2. Описываем экземпляр VRRP
+vrrp_instance VI_1 {
+    state MASTER             # На втором сервере будет BACKUP
+    interface ens33           # Имя  сетевого интерфейса (ip a)
+    virtual_router_id 51     # Должен быть одинаковым на обеих машинах
+    priority 100             # На BACKUP сервере будет 90
+    advert_int 1             # Сообщает BACKUP серверу что живой каждую секунду
+
+    # Пароль для связи между серверами (можно и без него)
+    authentication {
+        auth_type PASS
+        auth_pass 12345
+    }
+
+    # Плавающий IP, который будет переезжать
+    virtual_ipaddress {
+        192.168.14.130        # Свободный IP из моей подсети
+    }
+
+    # 3. Привязываем скрипт к этому инстансу
+    track_script {
+        check_script
+    }
+}
+```
+
+
+
+
+
 
 
 
