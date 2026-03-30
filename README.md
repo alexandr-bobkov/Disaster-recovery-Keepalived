@@ -52,8 +52,8 @@ exit 0
 ```
 **В скрипте дополнительно настроена проверка процесса сервиса NGINX используя команду [`pidof`](https://linuxcookbook.ru/articles/komanda-pidof-linux)**
 
-* Конфигурационный файл keepalived на сервере:
-
+<details>
+<summary>Конфигурационный файл keepalived на сервере: </summary>
 ```
 global_defs {
     script_user root # от имени какого пользователя выполнять проверку /etc/keepalived/check_web.sh
@@ -93,6 +93,7 @@ vrrp_instance VI_1 {
     }
 }
 ```
+</details>
 
 
 
