@@ -97,6 +97,52 @@ vrrp_instance VI_1 {
 </details>
 
 
+<details>
+<summary>Конфигурационный файл keepalived на резервном сервере:</summary>
+
+```conf
+global_defs {
+    script_user root  # от имени какого пользователя выполнять проверку /etc/keepalived/check_web.sh
+    enable_script_security # Разрешаем запуск внешних скриптов (безопасность)
+}
+
+# 1. Описываем  скрипт проверки
+
+vrrp_script check_script {
+    script "/etc/keepalived/check_web.sh"
+    interval 3                            # Проверка каждые 3 секунды
+    fall 2                                # Количесвто провалов для смены статуса
+    rise 2                                # Количество успешных проверок для возврата
+
+}
+	# 2. Описываем экземпляр VRRP
+
+vrrp_instance VI_1 {
+    state BACKUP              # ОТЛИЧИЕ 1: тут BACKUP
+    interface ens33            # Имя должно совпадать с моим интерфейом (ip a)
+    virtual_router_id 51      # Должен быть ТАКИМ ЖЕ, как на Master
+    priority 90               # ОТЛИЧИЕ 2: ниже, чем на Master (там 100)
+    advert_int 1              #сервер будет слушать  Master сервер каждую 1 секунду
+
+	# Пароль для связи между серверами (можно и без него)
+
+    authentication {
+        auth_type PASS
+        auth_pass 12345
+    }
+	# Плавающий IP, который будет переезжать
+
+    virtual_ipaddress {
+        192.168.14.130         # Тот же самый плавающий IP
+    }
+	# 3. Привязываем скрипт к этому инстансу
+
+    track_script {
+        check_script          # Cкрипт должен быть на обоих срверах обязательно!
+    }
+}
+```
+</details>
 
 
 
