@@ -50,7 +50,7 @@ fi
 # Если все три проверки прошли успешно, возвращаем 0
 exit 0
 ```
-* **В скрипте дополнительно настроена проверка процесса сервиса NGINX используя утилиту [`pidof`](https://linuxcookbook.ru/articles/komanda-pidof-linux)**
+**В скрипте дополнительно настроена проверка процесса сервиса NGINX используя команду [`pidof`](https://linuxcookbook.ru/articles/komanda-pidof-linux)**
 
 
 
