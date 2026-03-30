@@ -53,8 +53,9 @@ exit 0
 **В скрипте дополнительно настроена проверка процесса сервиса NGINX используя команду [`pidof`](https://linuxcookbook.ru/articles/komanda-pidof-linux)**
 
 <details>
-<summary>Конфигурационный файл keepalived на сервере: </summary>
-```
+<summary>Конфигурационный файл keepalived на сервере:</summary>
+
+```conf
 global_defs {
     script_user root # от имени какого пользователя выполнять проверку /etc/keepalived/check_web.sh
     enable_script_security # Разрешаем запуск внешних скриптов (безопасность)
