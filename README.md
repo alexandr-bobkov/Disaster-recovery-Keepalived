@@ -11,7 +11,7 @@
 ### ОТВЕТ:
 * Схема во вложении.
 <summary>Скриншот настройки маршрутизаторов</summary>
-<img src="img/1.jpg" width = 100%>
+<img src="img/1.png" width = 100%>
 
 
 
