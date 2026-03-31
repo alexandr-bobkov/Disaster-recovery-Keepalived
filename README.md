@@ -152,6 +152,9 @@ vrrp_instance VI_1 {
 <summary>Удаляем отслеживаемый файл с сервера (его ip 192.168.14.131)</summary>
 <img src="img/3.jpg" width = 100%>
 
+<summary>Видим, что стал отвечать резервный сервер (его ip 192.168.14.128)</summary>
+<img src="img/4.jpg" width = 100%>
+
 
 
 
