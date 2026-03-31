@@ -149,6 +149,9 @@ vrrp_instance VI_1 {
 <summary>Штатная работа сервера (его ip 192.168.14.131)</summary>
 <img src="img/2.jpg" width = 100%>
 
+<summary>Удаляем отслеживаемый файл с сервера (его ip 192.168.14.131)</summary>
+<img src="img/3.jpg" width = 100%>
+
 
 
 
