@@ -244,4 +244,4 @@ mv "$TEMP_FILE" "$TRACK_FILE"
 
 <summary>Запускаем стресстест для тестировани на сервере с ip 192.168.32.128 и 192.168.32.129</summary>
 <img src="img/6.jpg" width = 100%>
-<img src="img/7.jpg" width = 100%>
+<img src="img/_7.jpg" width = 100%>
