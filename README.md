@@ -167,7 +167,7 @@ vrrp_instance VI_1 {
 
 ## ОТВЕТ:
 
-- Скрипт необходимо установить на каждом сервере и добавить на выполнение через crontab:
+- Скрипт необходимо установить на каждом сервере (файл кидаю в /etc/keepalived/update_priority.sh) и добавить на выполнение через crontab:
 
 ```bash
 #!/bin/bash
@@ -236,6 +236,42 @@ mv "$TEMP_FILE" "$TRACK_FILE"
 ```bash
 * * * * * /bin/bash /etc/keepalived/update_priority.sh
 ```
+### Конфигурационный файл keepalived на каждом сервере (/etc/keepalived/keepalived.conf):
+```config
+global_defs {
+    script_user root  # от имени какого пользователя выполнять проверку /etc/keepalived/check_web.sh
+    enable_script_security # Разрешаем запуск внешних скриптов (безопасность)
+}
+
+# Описываем файл, за которым нужно следить
+vrrp_track_file check_load {
+    file "/etc/keepalived/vrrp_priority"
+}
+
+vrrp_instance VI_1 {
+    state BACKUP          # На всех серверах ставим BACKUP, приоритет решит всё сам
+    interface ens33        # Cетевой интерфейс
+    virtual_router_id 51  # Должен быть одинаковым в одной группе
+    priority 100          # Это значение будет ПЕРЕЗАПИСАНО числом из файла
+
+    advert_int 1
+
+    authentication {
+        auth_type PASS
+        auth_pass 12345
+    }
+
+    virtual_ipaddress {
+        192.168.32.140     # Твой плавающий IP
+    }
+
+    # Подключаем отслеживание файла
+    track_file {
+        check_load
+    }
+}
+```
+
 
 ### Скриншоты работы:
 
