@@ -294,7 +294,7 @@ vrrp_instance VI_1 {
 
 <details>
 <summary>Шпаргалка по логам:</summary>
-# Анализ логов Keepalived при работе с vrrp_track_file
+Анализ логов Keepalived при работе с vrrp_track_file
 
 При использовании динамического изменения приоритета через файл, в системном логе (journalctl -u keepalived) фиксируются следующие критически важные этапы работы кластера:
 
