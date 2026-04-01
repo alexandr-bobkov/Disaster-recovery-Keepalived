@@ -237,7 +237,11 @@ mv "$TEMP_FILE" "$TRACK_FILE"
 * * * * * /bin/bash /etc/keepalived/update_priority.sh
 ```
 
-## Скриншоты работы:
+### Скриншоты работы:
 
 <summary>Штатная изначальная работа, мастер сервер с ip 192.168.32.128 (плавающий ip 192.168.32.140)</summary>
 <img src="img/5.jpg" width = 100%>
+
+<summary>Запускаем стресстест для тестировани на сервере с ip 192.168.32.128 и 192.168.32.129</summary>
+<img src="img/6.jpg" width = 100%>
+<img src="img/7.jpg" width = 100%>
